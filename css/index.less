@@ -1,0 +1,218 @@
+/* css 初始化 */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// 声明字体
+@font-face{
+  font-family: "ELECTRONIC";
+  src:url(../fonts/DS-Digital/DS-DIGI-1.ttf);
+}
+//声明公共样式
+//1.上下左右居中
+.align-lrtb-center{
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+li{list-style:none;}
+body{
+  background: radial-gradient(rgb(0, 166, 243) ,darkblue 50%);
+  line-height: 1.15;
+  min-width: 1024px;
+  min-height: 100vh;
+}
+
+.header{
+  position: relative;
+  height: 1rem;
+  background: darkblue;
+  user-select: none;
+  z-index: 1;
+  h1{
+    font-size:.4rem;
+    text-align: center;
+    line-height: 1rem;
+    color: #fff;
+  }
+  .showTime{
+    position: absolute;
+    top:0;
+    right: .375rem;
+    line-height: 1rem;
+    color: #fff;
+    font-size: .25rem;
+  }
+}
+.header::before{
+  content:'';
+  position: absolute;
+  bottom:0;
+  left: 0;
+  height:.0625rem;
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  z-index: -1; 
+}
+
+// 主要内容区域
+// 1.四个边角公共复用样式
+.border-angle{
+  &::before,
+  &::after{
+    content:"";
+    position: absolute;
+    width:10px;
+    height:10px;
+    border:solid 2px #02a6b5; 
+    top:0;
+  }
+  &::before{
+    left:-1px;
+    border-right-color: transparent;
+  }
+  &::after{
+    right:-1px;
+    border-left-color: transparent;
+  }
+}
+// 2.主盒子区域
+@keyframes mapRotate{
+  100%{transform: translate(-50%,-50%) rotate(360deg)}
+}
+@keyframes mapRotateRevers{
+  100%{transform: translate(-50%,-50%) rotate(-360deg)}
+}
+.mainbox{
+  display: flex;
+  min-width: 1024px;
+  max-width: 1920px;
+  margin:0 auto;
+  padding:.125rem .125rem 0;
+  .column{
+    flex: 3;
+    &:nth-child(2){
+      flex: 5;
+    }
+    .panel{
+      position: relative;
+      height: 3.875rem;
+      border:solid 1px rgba(25,186,139,0.17);
+      padding:.125rem;
+      margin-bottom: .1875rem;
+      background-color:rgba(255,255,255,0.2);
+      .border-angle();
+      &::before,
+      &::after{
+        border-bottom-color: transparent;
+      }
+      .panel-footer{
+        position: absolute;
+        bottom:.15rem;
+        left:0;
+        width:100%;
+        .border-angle();
+        &::before,
+        &::after{
+          border-top-color: transparent;
+        }
+      }
+      h2{
+        font-size: .25rem;
+        height: .6rem;
+        color: #fff;
+        line-height: .6rem;
+        text-align: center;
+      }
+      .chart{
+        height: 3rem;
+        // background-color: pink;
+      }
+    }
+    .no{
+      position: relative;
+      background-color:rgba(101,132,226,0.1);
+      padding:0 .1875rem;
+      margin:0 10px;
+      user-select: none;
+      .border-angle();
+      &::before,
+      &::after{
+        width:.3125rem;
+      }
+      &::before{
+        border-bottom-color: transparent;
+      }
+      &::after{
+        bottom: 0;
+        top:unset;
+        border-top-color: transparent;
+      }
+      .no-hd{
+        border: solid 1px rgba(25, 186, 139, 0.17);
+        ul{
+          display: flex;
+          li{
+            flex:1;
+            color: #ffeb7b;
+            font-size: .875rem;
+            text-align: center;
+            font-family: "ELECTRONIC";
+            &:first-child{
+              position: relative;
+            }
+            &:first-child::after{
+              content:"";
+              position: absolute;
+              width:100%;
+              height:50%;
+              top:25%;
+              left:0;
+              border-right: solid 2px rgba(255,255,255,0.75); 
+            }
+          }
+        }
+      }
+      .no-bd{
+        ul{
+          display: flex;
+          li{
+            flex:1;
+            color: #fff;
+            font-size: 0.225rem;
+            height: .5rem;
+            line-height: .5rem;
+            text-align: center;
+          }
+        }
+      }
+    }
+    .map{
+      position: relative;
+      height: 10.125rem;
+      .map-bg{
+        position: absolute;
+        width: 6.475rem;
+        height: 6.475rem;
+        .align-lrtb-center();
+        background: url(../images/map.png) no-repeat;
+        background-size:100% 100%;
+        opacity: 0.5;
+        animation: mapRotate linear 180s infinite;
+        z-index:1;
+      }
+      .map-bg-rotate-revers{
+        position: absolute;
+        width:8rem;
+        height:8rem;
+        .align-lrtb-center(); 
+        background: url(../images/linkmap.png) no-repeat;
+        background-size: 100% 100%;
+        animation: mapRotateRevers linear 360s infinite;
+        filter: invert(1) blur(2px);
+        z-index: 2;
+      }
+    }
+  }
+}
