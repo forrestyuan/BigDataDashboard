@@ -88,6 +88,7 @@ body {
   padding: 0.125rem 0.125rem 0;
 }
 .mainbox .column {
+  position: relative;
   flex: 3;
 }
 .mainbox .column:nth-child(2) {
@@ -200,6 +201,7 @@ body {
 }
 .mainbox .column .no .no-hd ul {
   display: flex;
+  min-height: 51px;
 }
 .mainbox .column .no .no-hd ul li {
   flex: 1;
@@ -231,11 +233,13 @@ body {
   line-height: 0.5rem;
   text-align: center;
 }
-.mainbox .column .map {
-  position: relative;
-  height: 10.125rem;
+.mainbox .column .map-bg-zone {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
 }
-.mainbox .column .map .map-bg {
+.mainbox .column .map-bg-zone .map-bg {
   position: absolute;
   width: 6.475rem;
   height: 6.475rem;
@@ -245,10 +249,10 @@ body {
   background: url(../images/map.png) no-repeat;
   background-size: 100% 100%;
   opacity: 0.5;
-  animation: mapRotate linear 180s infinite;
+  animation: mapRotate linear 100s infinite;
   z-index: 1;
 }
-.mainbox .column .map .map-bg-rotate-revers {
+.mainbox .column .map-bg-zone .map-bg-rotate-revers {
   position: absolute;
   width: 8rem;
   height: 8rem;
@@ -257,7 +261,23 @@ body {
   transform: translate(-50%, -50%);
   background: url(../images/linkmap.png) no-repeat;
   background-size: 100% 100%;
-  animation: mapRotateRevers linear 360s infinite;
+  animation: mapRotateRevers linear 180s infinite;
   filter: invert(1) blur(2px);
+  opacity: 0.25;
   z-index: 2;
+}
+.mainbox .column .map {
+  position: relative;
+  height: 10.125rem;
+  z-index: 1;
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 42px!important;
+  }
+}
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 80px!important;
+  }
 }
